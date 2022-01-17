@@ -1,0 +1,28 @@
+﻿@model BlogCoreEngine.Core.Entities.UsersBlogs
+@{
+     Layout = "_Layout";
+}
+<style>
+     .button {
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+     }
+</style>
+<div style="text-align: center; margin-top: 120px">
+     <div style="align-content: center">
+          <p>
+               You do not have access to this blog!
+          </p>
+          <p>To receive access you have to buy the subscription!</p>
+     </div>
+     <div style="align-content: center; margin-top: 50px">
+          @Html.ActionLink("Buy", "Buy", "Blog", new { blogId = Model.BlogId, userId = Model.UserId }, new { @class = "button" })
+     </div>
+     
+</div>
