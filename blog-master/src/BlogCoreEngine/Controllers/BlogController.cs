@@ -47,7 +47,7 @@ namespace BlogCoreEngine.Controllers
 
         #endregion
 
-        #region New
+        #region Newe
 
         [Authorize(Roles = "Administrator")]
         public IActionResult New()
@@ -121,9 +121,11 @@ namespace BlogCoreEngine.Controllers
             return this.RedirectToAsync<HomeController>(x => x.Index());
         }
 
-        #endregion
-          
-       [Authorize]
+          #endregion
+
+        #region Buy
+
+          [Authorize]
        public async Task<IActionResult> Buy(Guid blogId, Guid userId)
        {
                var user = new UsersBlogs { BlogId = blogId, UserId = userId };
@@ -131,6 +133,7 @@ namespace BlogCoreEngine.Controllers
                await context.SaveChangesAsync();
                return this.RedirectToAsync<BlogController>(x => x.View(blogId));
        }
-     
-    }
+          #endregion
+
+     }
 }

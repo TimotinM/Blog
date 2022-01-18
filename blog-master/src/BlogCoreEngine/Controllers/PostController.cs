@@ -66,12 +66,11 @@ namespace BlogCoreEngine.Controllers
                     }
                     return View(post);
                }
-               var userBlog = new UsersBlogs { UserId = curUser.AuthorId, BlogId = id };
+               var userBlog = new UsersBlogs { UserId = curUser.AuthorId, BlogId = post.Blog.Id };
                return PartialView("_BuyBlog", userBlog);
           }
 
         #endregion
-
         #region Edit
 
         [Authorize]
