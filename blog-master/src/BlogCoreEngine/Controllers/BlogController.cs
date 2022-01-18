@@ -58,6 +58,7 @@ namespace BlogCoreEngine.Controllers
         [Authorize(Roles = "Administrator"), HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> New(BlogViewModel blog)
         {
+            var curUser = await userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
             {
                 var newBlog = await this.blogRepository.Add(new BlogDataModel
@@ -70,7 +71,7 @@ namespace BlogCoreEngine.Controllers
                     Modified = DateTime.Now
                 });
 
-                return this.RedirectToAsync<BlogController>(x => x.View(newBlog.Id));
+                 return this.RedirectToAsync<BlogController>(x => x.Buy(newBlog.Id, curUser.AuthorId));
             }
             return View(blog);
         }
@@ -126,7 +127,7 @@ namespace BlogCoreEngine.Controllers
         #region Buy
 
           [Authorize]
-       public async Task<IActionResult> Buy(Guid blogId, Guid userId)
+       public async Task<IActionResult> Buy(Guid blogId, Guid? userId)
        {
                var user = new UsersBlogs { BlogId = blogId, UserId = userId };
                await context.UsersBlogs.AddAsync(user);
